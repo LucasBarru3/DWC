@@ -10,7 +10,7 @@
     <li v-for="foto in fotos" :key="foto.id">
       <img width="30px" :src="foto.url"/>
       <p>{{ foto.title }}</p>
-      <button @click="eliminarFoto(foto.id)">Eliminar</button>
+      <button @click="eliminarFoto(foto.id)">Elimino</button>
     </li>
   </ul>
   <form @submit.prevent action="añadirFoto">
