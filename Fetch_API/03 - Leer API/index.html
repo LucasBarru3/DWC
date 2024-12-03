@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container my-5 text-center">
+        <button class="btn btn-danger w-100" onclick="traer()">Obtener</button>
+        <div class="mt-5" id="contenido">
+            Aquí volcaremos la información que traigamos
+            <br>
+        </div>
+    </div>
+
+    <script>
+        var contenido = document.querySelector('#contenido')
+        /* function traer() {
+            //traemos un solo usuario
+            fetch('https://randomuser.me/api/')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                console.log(data.results['0'])
+                contenido.innerHTML = `
+                <img src="${data.results['0'].picture.large}" width="100px" class="img-fluid rounded-circle"> 
+                <p>Nombre: ${data.results['0'].name.last}</p>
+                `
+            })
+        }  */
+
+        //async y await
+        async function traer() {
+            //En este caso traemos 5 usuarios
+            let respuesta = await fetch('https://randomuser.me/api/?results=5');
+            let datos = await respuesta.json();
+            console.log(datos);
+            console.log(datos.results);//vemos que tenemos un array con 5 elementos
+            //recorremos los 5 elementos y por cada uno de ellos generamos una imagen y un párrafo
+            datos.results.forEach(element => {
+                const img = document.createElement("img");
+                img.src = element.picture.large;
+
+                const parrafo=document.createElement("p");
+                parrafo.textContent =`Nombre: ${element.name.title} ${element.name.first} ${element.name.last}` 
+                
+                contenido.appendChild(img);
+                contenido.appendChild(parrafo);
+            });
+            /* contenido.innerHTML = `
+            <img src="${datos.results['0'].picture.large}" width="100px" class="img-fluid rounded-circle"> 
+            <p>Nombre: ${datos.results['0'].name.last}</p>
+            ` */
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

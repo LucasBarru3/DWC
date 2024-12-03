@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>API Fetch</h1>
+    <script>
+        //Explicación funcionamiento
+        //1.- Javascript sólo tiene un hilo de ejecución
+        //2.- Cuando se ejecuta una tarea esta puede ser de naturaleza SINCRONA o ASINCRONA
+        //3.- SINCRONA: cálculos complejos, iterar arreglos largos
+        //4.- ASINCRONA: peticiones HTTP o leer archivos de FS
+
+        //EJEMPLO de ASINCRONIA dada por el entorno => TIMER
+        /* let segundos=0;
+        setTimeout(() => {//creamos una callback function
+           console.log(`Ya han pasado los ${segundos} segundos del timer`) 
+        }, segundos * 1000);
+
+        console.log("esto se ejecuta al instante")
+        //si en el ejemplo anterior pondriamos segundos=0 también se verá la asincronia
+
+        //Ahora creo una operación síncrona muy grande
+        console.time("loop")//para determinar cuanto tiempo tarda el bucle inicio un temporizador
+        let total=0;
+        for(let i=0;i<500000000; i++){
+            total=total+i;
+        }
+        console.timeEnd("loop");//para determinar cuanto tiempo tarda el bucle detengo el temporizador
+        console.log("Final del loop", total); //vemos que primero se ejecuta esto y despues la función asincrona setTimeout
+        */
+
+        // Otra explicación
+        // Generamos un array que llamamos con temporizador
+        const data=[{
+            title: 'Aprendiendo javascript',
+            year: 2021, 
+            author: 'Jose'
+        },{
+            title: 'aprendiendo php',
+            year: 2020,
+            author: 'Eli'
+        },{
+            title: 'aprendiendo CSS',
+            year: 2019,
+            author: 'Iñaki'
+        }];
+
+        /* function getData(){
+            setTimeout(()=>{
+                return data;
+            }, 3000)
+        }
+        console.log(getData());//vemos que devuelve undefined porque todavía no tiene el dato
+ */
+        // 2. A partir de ES6 se pueden crear promesas que gestionen la asincronía
+        //ahora creamos la promesa en una función y después mostramos lo que devuelve
+        function getData(){
+            return new Promise((resolv, reject) =>{
+                if (data.length==0){
+                    reject(new Error('Data está vacío'))//primero gestionamos el error. Es una buena práctica
+                }
+                setTimeout(()=>{
+                resolv (data); //si todo va bien nos lo devuelve en el resolv
+            }, 2000)
+            })
+        }
+
+        getData()//al llamar a getData como devuelve una promesa podemos gestionar resultado correcto o error
+            .then((respuesta) => console.log(respuesta)) //aquí recogemos el caso de que la respuesta de la promesa sea correcta
+            .catch((error) => console.log(error)) //si la respuesta devuelve error lo gestionamos aquí
+            .finally(console.log("Esto se ejecuta SIEMPRE"))
+           
+
+        //3. Con async/await gestionamos las funciones asíncronas. 
+        //Es sugar syntax para que nos parezca que la ejecución es síncrona 
+        //generamos una variable libros en donde se recogen los datos de la ejecución de la funcióna síncrona
+        //como await tiene que estar dentro de una función async tenemos que meterla dentro de una
+        /* async function cogerLibros(){
+            try {
+                const libros = await getData();
+                console.log(libros)
+            } catch (error) {
+                console.log(error)
+            }finally{
+                console.log("Esto se ejecuta SIEMPRE")
+            }
+            
+        } 
+        cogerLibros(); */
+
+        /* //OTRO EJEMPLO 
+        //Creamos una función asíncrona con async y vemos que devuelve una promesa
+        async function hello_1() {
+            return 'Hello_1'
+        }
+        console.log(hello_1());
+
+
+        //Una función asíncrona nos devolverá una promesa y con then obtenemos su resultado
+        async function hello_2() {
+            return 'Hello_2'
+        }
+        console.log(hello_2()
+            .then(valor => console.log(valor))
+        );
+        //es igual a lo anterior
+        console.log(hello_2()
+            .then(console.log));
+
+        
+        //Ahora con await dentro de una función async
+        function crearPromesa(){
+            const promesa = new Promise ((resolve)=>
+                resolve("Hello Promise Await"));
+            return promesa;
+        }
+        async function hello3(){
+            const dato  = await crearPromesa();
+            console.log(dato);
+        }
+        hello3();*/
+
+
+
+    </script>
+</body>
+</html>

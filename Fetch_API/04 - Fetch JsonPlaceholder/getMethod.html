@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // URL de una API pública de ejemplo
+        const url = 'https://jsonplaceholder.typicode.com/users';
+
+        // Usamos fetch para obtener datos de la API
+        fetch(url)
+        .then(respuesta => {
+            // Verificamos si la respuesta fue exitosa
+            if (!respuesta.ok) {
+            throw new Error('Network response was not ok');
+            }
+            // Convertimos la respuesta a JSON
+            console.log(respuesta);
+            return respuesta.json();
+        })
+        .then(data => {
+            // Mostramos los datos en la consola
+            console.log(data);
+        })
+        .catch(error => {
+            // Manejamos cualquier error
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+    </script>
+    
+</body>
+</html>

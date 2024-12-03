@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // URL de una API pública de ejemplo para pruebas con POST
+        const url = 'https://jsonplaceholder.typicode.com/posts';
+
+        // Datos que queremos enviar en la solicitud POST
+        const data = {
+        title: 'Nuevo Post',
+        body: 'Este es el contenido del post',
+        userId: 1
+        };
+
+        // Usamos fetch con el método POST
+        fetch(url, {
+        method: 'POST', // Especificamos el método HTTP
+        headers: {
+            'Content-Type': 'application/json' // Indicamos que el contenido es JSON
+        },
+        body: JSON.stringify(data) // Convertimos los datos a una cadena JSON
+        })
+        .then(response => {
+            // Verificamos si la respuesta fue exitosa
+            if (!response.ok) {
+            throw new Error('Network response was not ok');
+            }
+            // Convertimos la respuesta a JSON
+            return response.json();
+        })
+        .then(data => {
+            // Mostramos la respuesta del servidor en la consola
+            console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+            // Manejamos cualquier error
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+    </script>
+    
+</body>
+</html>

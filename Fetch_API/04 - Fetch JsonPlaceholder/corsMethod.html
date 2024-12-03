@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // URL de una API pública de ejemplo que permite CORS
+        const url = 'https://jsonplaceholder.typicode.com/posts/1';
+
+        // Configuración de la solicitud con `mode: 'cors'`
+        fetch(url, {
+        method: 'GET',
+        mode: 'cors', // Especificamos que queremos una solicitud con CORS
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        })
+        .then(response => {
+            // Verificamos si la respuesta fue exitosa
+            if (!response.ok) {
+            throw new Error('Network response was not ok');
+            }
+            // Convertimos la respuesta a JSON
+            return response.json();
+        })
+        .then(data => {
+            // Mostramos los datos en la consola
+            console.log('Datos obtenidos:', data);
+        })
+        .catch(error => {
+            // Manejamos cualquier error
+            console.error('Hubo un problema con la solicitud fetch:', error);
+        });
+
+    </script>
+    
+</body>
+</html>

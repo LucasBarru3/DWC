@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Las promesas son objetos que representan la terminación o el fracaso de una operación asíncrona.
+        1.- Crea una función llamada prepararPedido que simule la preparación de un pedido. 
+            Esta función debe devolver una Promesa que se resuelve en 3 segundos con el mensaje "Pedido preparado".
+        2.- Crea otra función llamada entregarPedido que simule la entrega del pedido. 
+            Esta función debe devolver una Promesa que se resuelve en 2 segundos con el mensaje "Pedido entregado".
+        3.- Utiliza la función then para llamar a entregarPedido después de que prepararPedido se haya completado.
+        4.- Agrega un catch para capturar cualquier error que ocurra en el proceso de preparación o entrega.
+        */
+
+        function prepararPedido() {
+            return new Promise((resolve, reject) => {
+                console.log("Preparando el pedido...");
+                setTimeout(() => {
+                    resolve("Pedido preparado");
+                }, 3000);
+        });
+    }
+
+        function entregarPedido() {
+            return new Promise((resolve, reject) => {
+                console.log("Entregando el pedido...");
+                setTimeout(() => {
+                    resolve("Pedido entregado");
+                }, 2000);
+            });
+        }
+
+    // Ejecutando el flujo de pedidos
+        prepararPedido()
+            .then((mensajePreparado) => {
+                console.log(mensajePreparado);
+                return entregarPedido();
+            })
+            .then((mensajeEntregado) => {
+                console.log(mensajeEntregado);
+            })
+            .catch((error) => {
+                console.error("Hubo un error:", error);
+            });
+
+
+    </script>
+    
+</body>
+</html>

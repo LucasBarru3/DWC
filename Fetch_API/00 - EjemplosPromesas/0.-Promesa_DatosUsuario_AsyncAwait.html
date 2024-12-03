@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function obtenerUsuario() {
+            return new Promise((resolve, reject) => {
+                console.log("Obteniendo datos del usuario...");
+                setTimeout(() => {
+                    resolve({ nombre: "Juan", edad: 25 });
+                }, 2000);
+        });
+}
+
+        async function mostrarUsuario() {
+            try {
+                const usuario = await obtenerUsuario();
+                console.log(`Usuario: ${usuario.nombre}, Edad: ${usuario.edad}`);
+            } catch (error) {
+                console.error("Hubo un error al obtener el usuario:", error);
+            }
+        }
+
+        // Ejecutar la función para mostrar los datos del usuario
+        mostrarUsuario();
+
+
+    </script>
+    
+</body>
+</html>
