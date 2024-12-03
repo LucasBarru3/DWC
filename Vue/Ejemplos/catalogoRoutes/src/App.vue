@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from 'vue-router'; // Importa los componentes 
 <template>
     <!-- Enlaces de navegación -->
     <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/products">Ir a la lista de productos</RouterLink>
+    <RouterLink to="/products">Ir a la lista de productes</RouterLink>
 
     <!-- Aquí se renderiza la vista correspondiente -->
     <RouterView />
