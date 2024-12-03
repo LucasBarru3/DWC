@@ -1,5 +1,5 @@
 <template>
-  <h1>Uso de Axios</h1>
+  <h1>Uso de Axioss</h1>
   <ul>
     <li v-for="user in users">
       {{user.username}} - {{ user.name }} - {{ user.email }} - {{ user.phone }}
